@@ -1,5 +1,5 @@
-import { PokemonGrid, PokemonsResponse, SimplePokmon } from "@/app/pokemons";
-import Image from "next/image";
+import { PokemonGrid, PokemonsResponse, SimplePokmon } from "@/pokemons";
+
 
 const getPokemons = async (limit = 20, ofset = 0): Promise<SimplePokmon[]> => {
   const data: PokemonsResponse = await fetch(
