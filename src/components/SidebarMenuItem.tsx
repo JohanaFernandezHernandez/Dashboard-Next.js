@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ReactNode } from "react";
 
 interface Props {
     path:string,
-    Icon: any,
+    Icon: ReactNode;
     title: string,
     subtitle:string
 
