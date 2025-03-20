@@ -1,11 +1,18 @@
 "use client";
 
 import { useAppDispatch, useAppSelector } from "@/lib/store";
-import { addOne, subtractOne } from "@/store/counter/counterSlice";
-import { useState } from "react";
+import { addOne, initCounterState, subtractOne } from "@/store/counter/counterSlice";
+import { useEffect, useState } from "react";
 
 interface Props {
     value?: number
+}
+
+
+const getApiCounter = async () => {
+  const data = await fetch('/api/counter').then(res => res.json());
+
+  return data;
 }
 
 export const CardCounter = ({value = 0}: Props) => {
@@ -13,7 +20,17 @@ export const CardCounter = ({value = 0}: Props) => {
   const count = useAppSelector(state => state.counter.count);
   const dispatch = useAppDispatch();
 
-  // const [counter, setCounter] = useState(value);
+
+  // useEffect(() => {
+  //   dispatch( initCounterState(value));
+
+  // }, [dispatch, value])
+
+  useEffect(() => {
+    getApiCounter()
+    .then(({count}) => dispatch( initCounterState(count)) )
+
+  }, [dispatch])
 
   return (
     <>
